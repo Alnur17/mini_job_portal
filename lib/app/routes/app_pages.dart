@@ -1,16 +1,24 @@
 import 'package:get/get.dart';
 
+import '../modules/auth/login/bindings/login_binding.dart';
+import '../modules/auth/login/views/login_view.dart';
+import '../modules/auth/signup/bindings/signup_binding.dart';
+import '../modules/auth/signup/views/signup_view.dart';
+import '../modules/dashboard/bindings/dashboard_binding.dart';
+import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/saved_jobs/bindings/saved_jobs_binding.dart';
+import '../modules/saved_jobs/views/saved_jobs_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.LOGIN;
 
   static final routes = [
     GetPage(
@@ -22,6 +30,26 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.SAVED_JOBS,
+      page: () => const SavedJobsView(),
+      binding: SavedJobsBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOGIN,
+      page: () => LoginView(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.SIGNUP,
+      page: () => const SignupView(),
+      binding: SignupBinding(),
+    ),
+    GetPage(
+      name: _Paths.DASHBOARD,
+      page: () => DashboardView(),
+      binding: DashboardBinding(),
     ),
   ];
 }
