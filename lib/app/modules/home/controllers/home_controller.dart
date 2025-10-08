@@ -1,23 +1,34 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
-  //TODO: Implement HomeController
+import '../../../data/api.dart';
+import '../../../data/base_client.dart';
+import '../model/products_model.dart';
 
-  final count = 0.obs;
+class HomeController extends GetxController {
+  RxList<Product> productsList = <Product>[].obs;
+  RxBool isLoading = false.obs;
+
   @override
   void onInit() {
     super.onInit();
+    fetchProducts();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> fetchProducts() async {
+    try {
+      isLoading.value = true;
+      final response = await BaseClient.getRequest(
+        api: Api.allProducts,
+        headers: {'Content-Type': 'application/json'},
+      );
+      final jsonData = await BaseClient.handleResponse(response);
+      final productsModel = ProductsModel.fromJson(jsonData);
+      productsList.assignAll(productsModel.products);
+    } catch (e) {
+      print('Error fetching products: $e');
+      // Handle error, e.g., show snackbar
+    } finally {
+      isLoading.value = false;
+    }
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

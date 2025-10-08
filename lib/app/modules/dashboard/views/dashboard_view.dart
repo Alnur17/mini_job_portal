@@ -82,7 +82,7 @@ class DashboardView extends GetView<DashboardController> {
                         ),
                       ),
                       text: 'Home',
-                      backgroundColor: AppColors.textColorBlue,
+                      backgroundColor: AppColors.orange,
                     ),
                     GButton(
                       icon: Icons.circle,
@@ -108,7 +108,7 @@ class DashboardView extends GetView<DashboardController> {
                       ),
                       text: 'Saved Jobs',
                       iconColor: Colors.blue,
-                      backgroundColor: AppColors.textColorBlue,
+                      backgroundColor: AppColors.orange,
                     ),
                     GButton(
                       leading: dashboardController.selectedIndex.value == 2
@@ -132,7 +132,7 @@ class DashboardView extends GetView<DashboardController> {
                       ),
                       text: 'Profile',
                       iconColor: Colors.blue,
-                      backgroundColor: AppColors.textColorBlue,
+                      backgroundColor: AppColors.orange,
                       icon: Icons.circle,
                     ),
                   ],

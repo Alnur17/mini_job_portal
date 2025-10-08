@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import '../app_color/app_colors.dart';
 import '../app_text_style/styles.dart';
 import 'custom_button.dart';
 
 class CustomListTile extends StatelessWidget {
-  final String leadingText; // e.g., Initials or job identifier
-  final String title; // Job title
-  final String companyName; // Company name
-  final String location; // Job location
-  final String salary; // Salary information
-  final VoidCallback? onTap; // Optional tap for the entire tile
-  final VoidCallback? onApply; // Callback for the Apply button
+  final String title;
+  final String companyName;
+  final String location;
+  final String salary;
+  final VoidCallback? onTap;
+  final VoidCallback onApply;
   final Color? backgroundColor;
   final Color? borderColor;
   final TextStyle? titleStyle;
@@ -20,13 +21,12 @@ class CustomListTile extends StatelessWidget {
 
   const CustomListTile({
     super.key,
-    required this.leadingText,
     required this.title,
     required this.companyName,
     required this.location,
     required this.salary,
     this.onTap,
-    this.onApply,
+    required this.onApply,
     this.backgroundColor,
     this.borderColor,
     this.titleStyle,
@@ -38,6 +38,7 @@ class CustomListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: Get.width.w,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -47,76 +48,55 @@ class CustomListTile extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Leading Circle with Text
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: const ShapeDecoration(
-                shape: CircleBorder(),
-                color: AppColors.white,
-              ),
-              child: Text(
-                leadingText,
-                style: h5,
-              ),
+            // Job Title
+            Text(
+              title,
+              style: titleStyle ??
+                  h5.copyWith(fontWeight: FontWeight.bold),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(width: 12),
-            // Job Details
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Job Title
-                  Text(
-                    title,
-                    style: titleStyle ??
-                        h5.copyWith(fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  // Company Name
-                  Text(
-                    companyName,
-                    style: companyStyle ?? h6,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  // Location
-                  Text(
-                    location,
-                    style: locationStyle ?? h6,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  // Salary
-                  Text(
-                    salary,
-                    style: salaryStyle ?? h6,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 8),
-                  // Apply Button
-                  CustomButton(
-                    text: 'Apply',
-                    onPressed: () => onApply,
-                    height: 36,
-                    width: 100,
-                    backgroundColor: AppColors.orange, // Adjust color as needed
-                    textStyle: h6.copyWith(
-                      color: AppColors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    borderRadius: 8,
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                  ),
-                ],
+            const SizedBox(height: 4),
+            // Company Name
+            Text(
+              companyName,
+              style: companyStyle ?? h6,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 4),
+            // Location
+            Text(
+              location,
+              style: locationStyle ?? h6,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 4),
+            // Salary
+            Text(
+              salary,
+              style: salaryStyle ?? h6,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 8),
+            // Apply Button
+            CustomButton(
+              text: 'Apply',
+              onPressed: onApply,
+              height: 36,
+              // width: 100,
+              backgroundColor: AppColors.orange, // Adjust color as needed
+              textStyle: h6.copyWith(
+                color: AppColors.white,
+                fontWeight: FontWeight.w600,
               ),
+              borderRadius: 8,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
             ),
           ],
         ),
