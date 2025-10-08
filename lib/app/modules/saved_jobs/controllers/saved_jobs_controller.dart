@@ -11,7 +11,7 @@ class SavedJobsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    loadSavedJobs(); // ✅ Load on app start
+    loadSavedJobs();
   }
 
   void addJob(Product job) {
@@ -30,14 +30,12 @@ class SavedJobsController extends GetxController {
     Get.snackbar('Removed', '${job.title} removed from Saved Jobs');
   }
 
-  // ✅ Save list locally
   void saveJobsToLocal() {
     final List<Map<String, dynamic>> jsonList =
     savedJobs.map((job) => job.toJson()).toList();
     LocalStorage.saveData(key: storageKey, data: jsonEncode(jsonList));
   }
 
-  // ✅ Load list from local
   void loadSavedJobs() {
     final savedData = LocalStorage.getData(key: storageKey);
     if (savedData != null) {
@@ -46,9 +44,4 @@ class SavedJobsController extends GetxController {
     }
   }
 
-  // Optional: clear all saved jobs
-  void clearAllJobs() {
-    savedJobs.clear();
-    LocalStorage.removeData(key: storageKey);
-  }
 }

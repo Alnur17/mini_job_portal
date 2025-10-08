@@ -53,18 +53,19 @@ class ProfileView extends GetView<ProfileController> {
                   style: h5,
                 ),
                 Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(30),
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: Text(
+                      savedJobsController.savedJobs.length.toString(),
+                      style: h5,
                     ),
-                    child: Center(
-                      child: Text(
-                        savedJobsController.savedJobs.length.toString(),
-                        style: h5,
-                      ),
-                    )),
+                  ),
+                ),
               ],
             ),
           )

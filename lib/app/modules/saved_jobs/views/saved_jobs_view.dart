@@ -16,6 +16,7 @@ class SavedJobsView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: Text('Saved Jobs', style: appBarStyle),
         backgroundColor: AppColors.white,
       ),
@@ -24,22 +25,30 @@ class SavedJobsView extends StatelessWidget {
           return const Center(child: Text('No saved jobs yet'));
         }
         return ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           itemCount: savedJobsController.savedJobs.length,
           itemBuilder: (context, index) {
             final job = savedJobsController.savedJobs[index];
-            return CustomListTile(
-              title: job.title ?? '',
-              companyName: job.brand ?? '',
-              location: job.sku ?? '',
-              salary: '\$${job.price?.toStringAsFixed(2) ?? '0.00'}',
-              onTap: () {
-                Get.to(() => JobDetailsView(product: job));
-              },
-              onApply: () {
-                savedJobsController.removeJob(job);
-              },
-              backgroundColor: AppColors.silver,
-              borderColor: AppColors.borderColor,
+            return Padding(
+              padding: EdgeInsets.only(
+                top: index == 0 ? 0 : 8.0,
+                bottom:
+                    index == savedJobsController.savedJobs.length - 1 ? 110 : 0,
+              ),
+              child: CustomListTile(
+                title: job.title ?? '',
+                companyName: job.brand ?? '',
+                location: job.sku ?? '',
+                salary: '\$${job.price?.toStringAsFixed(2) ?? '0.00'}',
+                onTap: () {
+                  Get.to(() => JobDetailsView(product: job));
+                },
+                onApply: () {
+                  savedJobsController.removeJob(job);
+                },
+                backgroundColor: AppColors.silver,
+                borderColor: AppColors.borderColor,
+              ),
             );
           },
         );
